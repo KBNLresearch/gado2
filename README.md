@@ -9,10 +9,14 @@ The transformer used to make trainng-files from (Prima) page-xml is also include
 The trained model is available here: https://huggingface.co/willemjan/gado_gado
 Due to file size limits I was unable to include the model in this repo.
 
-The trained model can be used by running: ./api.py, this creates a listening port which can be queried like so:
-''
+The trained model can be used by running: ./api.py
+
+This creates a listening port which can be queried like so:
+
+
+``
 http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.
-''
+``
 
 ```
 {
