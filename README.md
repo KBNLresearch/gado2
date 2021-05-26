@@ -12,7 +12,7 @@ Due to file size limits I was unable to include the model in this repo.
 The trained model can be used by running: ./api.py, this creates a listening port which can be queried like so:
 
 http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.
-
+``
 {
   "result": [
     {
@@ -57,3 +57,4 @@ http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.
     }
   ]
 }
+``
