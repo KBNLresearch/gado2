@@ -1,6 +1,6 @@
 This a fork of: https://github.com/kamalkraj/BERT-NER
 
-It contains some local modifications to run it on the Surf-Sara research cloud,
+It contains some local modifications to run it on a different set of NER-classes.
 
 the data/train.txt is a combination of Conll-2002 and input from various Indonesian / Dutch newspapers.
 
