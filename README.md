@@ -7,7 +7,6 @@ the data/train.txt is a combination of Conll-2002 and input from various Indones
 The transformer used to make trainng-files from (Prima) page-xml is also included (page_to_bio.py).
 
 The trained model is available here: https://huggingface.co/willemjan/gado_gado
-Due to file size limits I was unable to include the model in this repo.
 
 The trained model can be used by running: ./api.py
 
