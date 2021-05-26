@@ -1,4 +1,4 @@
-This a fork of: https://github.com/kyzhouhzau/BERT-NER
+This a fork of: https://github.com/kamalkraj/BERT-NER
 
 It contains some local modifications to run it on the Surf-Sara research cloud,
 
