@@ -15,7 +15,7 @@ This creates a listening port which can be queried like so:
 
 
 ``
-curl -s http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.
+curl -s 'http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.'
 ``
 
 ```
