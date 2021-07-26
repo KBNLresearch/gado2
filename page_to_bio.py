@@ -19,8 +19,20 @@ import re
 
 from lxml import etree
 from pprint import pprint
+from pathlib import Path
 
-BASEDIR = 'data/'
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("debug.log"),
+    ]
+)
+
+
+BASEDIR = './'
 
 lookup = {'person': ['B-per', 'I-per'],
           'title_honours': ['B-per', 'I-per'],
@@ -29,10 +41,15 @@ lookup = {'person': ['B-per', 'I-per'],
           'Austronesian': ['B-misc', 'I-misc'],
           'date': ['B-date', 'I-date'],
           'miscellaneous': ['B-misc', 'I-misc'],
+          'denomination' : ['B-misc', 'I-misc'],
+          'reference': ['B-misc', 'I-misc'],
           }
+
+
 
 all_files = []
 
+logging.info('Working from directory: %s' % Path().absolute())
 
 for f in os.listdir(BASEDIR):
     if os.path.isdir(BASEDIR + os.sep + f + os.sep):
@@ -42,6 +59,9 @@ for f in os.listdir(BASEDIR):
                 for ff in os.listdir(path + os.sep + 'page'):
                     all_files.append(path + os.sep + 'page' + os.sep + ff)
 
+logging.info('Total nr of page files: %i' % len(all_files))
+
+quit = False
 
 for f in all_files:
     with open(f, 'rb') as fh:
@@ -70,7 +90,15 @@ for f in all_files:
                 offset = int(tag_info.split('offset:')[1].split(';')[0])
                 length = int(tag_info.split('length:')[1].split(';')[0])
 
+                if tag == 'title_honours':
+                    tag = 'person'
+                if tag == 'Austronesian':
+                    tag = 'person'
+
+
+                logging.info('file: %s\ttag: %s\toffset: %i\tlen: %i', f, tag, offset, length)
                 wanted_tags.append([tag, offset, length])
+
 
         txt_org = []
 
@@ -143,10 +171,14 @@ for f in all_files:
                 if txt_tagged[i] == prev_tag:
                     j = 1
                 print(word, lookup[txt_tagged[i]][j])
+                #quit = True
                 notag = 0
             else:
                 # Skip all untagged parts.
                 if notag < 20:
                     print(word, txt_tagged[i])
+                    #quit = True
                 notag += 1
             prev_tag = txt_tagged[i]
+    if quit:
+        break
