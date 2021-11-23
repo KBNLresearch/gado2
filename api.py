@@ -6,7 +6,7 @@ from bert import Ner
 app = Flask(__name__)
 CORS(app)
 
-model = Ner("out_base")
+model = Ner("out_base_all")
 
 
 @app.route("/predict/", methods=['GET'])
@@ -16,6 +16,8 @@ def predict():
         return jsonify({"result": 'too large!'})
     # try:
     out = model.predict(text)
+
+
     return jsonify({"result": out})
     # except Exception as e:
     #    print(e)

@@ -14,7 +14,6 @@ from pytorch_transformers import (BertConfig, BertForTokenClassification,
 
 
 class BertNer(BertForTokenClassification):
-
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, valid_ids=None):
         sequence_output = self.bert(
             input_ids, token_type_ids, attention_mask, head_mask=None)[0]
@@ -31,11 +30,8 @@ class BertNer(BertForTokenClassification):
         logits = self.classifier(sequence_output)
         return logits
 
-
 class Ner:
-
     def __init__(self, model_dir: str):
-        print(model_dir, '%%%')
         self.model, self.tokenizer, self.model_config = self.load_model(
             model_dir)
         self.label_map = self.model_config["label_map"]
