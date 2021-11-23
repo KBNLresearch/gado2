@@ -1,18 +1,23 @@
-This a fork of: https://github.com/kyzhouhzau/BERT-NER
+This a fork of: https://github.com/kamalkraj/BERT-NER
 
-It contains some local modifications to run it on the Surf-Sara research cloud,
+It contains some local modifications to run it on a different set of NER-classes.
 
 the data/train.txt is a combination of Conll-2002 and input from various Indonesian / Dutch newspapers.
 
 The transformer used to make trainng-files from (Prima) page-xml is also included (page_to_bio.py).
 
 The trained model is available here: https://huggingface.co/willemjan/gado_gado
-Due to file size limits I was unable to include the model in this repo.
 
-The trained model can be used by running: ./api.py, this creates a listening port which can be queried like so:
+The trained model can be used by running: ./api.py
 
-http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.
+This creates a listening port which can be queried like so:
 
+
+``
+curl -s 'http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.'
+``
+
+```
 {
   "result": [
     {
@@ -57,3 +62,4 @@ http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.
     }
   ]
 }
+```
