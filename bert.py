@@ -52,7 +52,7 @@ class Ner:
 
     def tokenize(self, text: str):
         """ tokenize input"""
-        words = word_tokenize(text)
+        words = word_tokenize(text, language="dutch")
         tokens = []
         valid_positions = []
         for i, word in enumerate(words):

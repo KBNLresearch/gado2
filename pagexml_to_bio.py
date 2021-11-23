@@ -39,15 +39,15 @@ NS_UC = ".//{http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15}Uni
 WANTED_TAGS = ["date", "denomination", "organization", "person", "place"]
 
 LOOKUP = {
-    "person": ["B-per", "I-per"],
-    "title_honours": ["B-per", "I-per"],
-    "place": ["B-loc", "I-loc"],
-    "organization": ["B-org", "I-org"],
-    "Austronesian": ["B-misc", "I-misc"],
-    "date": ["B-date", "I-date"],
-    "miscellaneous": ["B-misc", "I-misc"],
-    "denomination": ["B-misc", "I-misc"],
-    "reference": ["B-misc", "I-misc"],
+    "person": ["B-PER", "I-PER"],
+    "title_honours": ["B-PER", "I-PER"],
+    "place": ["B-LOC", "I-LOC"],
+    "organization": ["B-ORG", "I-ORG"],
+    "Austronesian": ["B-MISC", "I-MISC"],
+    "date": ["B-DAT", "I-DAT"],
+    "miscellaneous": ["B-MISC", "I-MISC"],
+    "denomination": ["B-DOM", "I-DOM"],
+    "reference": ["B-REF", "I-REF"],
 }
 
 

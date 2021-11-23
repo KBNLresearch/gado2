@@ -8,7 +8,7 @@ from bert import Ner
 app = Flask(__name__)
 CORS(app)
 
-model = Ner("out_base_all")
+model = Ner("out_base")
 
 
 #@app.route("/predict/", methods=['GET'])
@@ -29,12 +29,7 @@ def predict():
             p_tag = r.get('tag')
             ne += r.get('word') + ' '
 
-            if 'per' in p_tag:
-                lookup_type = 'person'
-            if 'loc' in p_tag:
-                lookup_type = 'location'
-            if 'misc' in p_tag:
-                lookup_type = 'misc'
+            lookup_type = p_tag
         else:
             if p_tag != 'O':
                 if not ne.strip() in [ne.get('ne') for ne in result]:
