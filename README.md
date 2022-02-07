@@ -31,7 +31,9 @@ $ rm data/train.txt # Remove old training data.
 $ rm -rf out_base # Remove old trained model.
 ``
 
-The page-xml export from: https://readcoop.eu/transkribus/
+The page-xml export: https://readcoop.eu/transkribus/howto/how-to-export-documents-from-transkribus/
+
+Download and unack the export zip, and look for the 'page' directory.
 
 Convert the page-xml to the bio format using the following command:
 
