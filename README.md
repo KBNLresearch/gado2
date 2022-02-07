@@ -34,6 +34,10 @@ Convert the page-xml to the bio format using the following command:
 $ ./pagexml_to_bio.py --page_dir <<Path to Pagefiles dir>> --output_filename data/train.txt --debug 1
 ``
 
+More info on .bio format can be found here:
+https://natural-language-understanding.fandom.com/wiki/Named_entity_recognition#BIO
+
+
 Insert GPU and run:
 
 ``
