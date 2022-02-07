@@ -1,3 +1,6 @@
+What is this?
+===
+
 This a fork of: https://github.com/kamalkraj/BERT-NER
 
 It contains some local modifications to run it on a different set of NER-classes.
@@ -10,13 +13,34 @@ In this project we used export pagexml files from: https://transkribus.eu/.
 
 Trained models are available here: https://huggingface.co/willemjan/
 
+
+Training using page files.
+===
+Remove old training data and model:
+``
+$ rm data/train.txt # Remove old training data.
+$ rm -rf out_base # Remove old trained model.
+``
+The page files are an output format by: https://readcoop.eu/transkribus/
+
+Convert the page-files to the bio format using the following command:
+``
+$ pagexml_to_bio.py --page_dir <<Path to Pagefiles dir>> --output_filename data/train.txt --debug 1
+``
+Insert GPU and run:
+``
+$ ./train.sh
+``
+The model will be outputed in the directory 'out_base'.  
+
+Running HTTP API.
+===
 The trained model can be used by running: ./api.py
 
 This creates a listening port which can be queried like so:
 
-
 ``
-curl -s 'http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.&model=nl2'
+$ curl -s 'http://localhost:8000/predict/?text=Willem jan is een liefhebber van Gado-gado.&model=nl2'
 ``
 
 ```
