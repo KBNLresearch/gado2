@@ -163,12 +163,12 @@ class NerProcessor(DataProcessor):
                 "I-LOC",
                 "B-DAT",
                 "I-DAT",
-                #"B-REF",
-                #"I-REF",
+                "B-REF",
+                "I-REF",
                 "B-DOM",
                 "I-DOM",
-                #"B-QUA",
-                #"I-QUA",
+                "B-QUA",
+                "I-QUA",
                 "B-MISC",
                 "I-MISC",
                 "[CLS]",
@@ -319,7 +319,7 @@ def main():
                         action='store_true',
                         help="Set this flag if you are using an uncased model.")
     parser.add_argument("--train_batch_size",
-                        default=25,
+                        default=20,
                         type=int,
                         help="Total batch size for training.")
     parser.add_argument("--eval_batch_size",
@@ -601,13 +601,13 @@ def main():
                             temp_1.append(label_map[label_ids[i][j]])
                             temp_2.append(label_map[logits[i][j]])
 
-        report = classification_report(y_true, y_pred,digits=4)
-        logger.info("\n%s", report)
-        output_eval_file = os.path.join(args.output_dir, "eval_results.txt")
-        with open(output_eval_file, "w") as writer:
-            logger.info("***** Eval results *****")
-            logger.info("\n%s", report)
-            writer.write(report)
+        #report = classification_report(y_true, y_pred,digits=4)
+        #logger.info("\n%s", report)
+        #output_eval_file = os.path.join(args.output_dir, "eval_results.txt")
+        #with open(output_eval_file, "w") as writer:
+        #    logger.info("***** Eval results *****")
+        #    logger.info("\n%s", report)
+        #    writer.write(report)
 
 
 if __name__ == "__main__":

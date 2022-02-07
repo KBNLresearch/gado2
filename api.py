@@ -8,14 +8,27 @@ from bert import Ner
 app = Flask(__name__)
 CORS(app)
 
-model = Ner("out_base")
+
+models = {"nl1": Ner("models/nl1"),
+          "nl2": Ner("models/nl2"),
+          "indo1": Ner("models/indo1"),
+          "indo2": Ner("models/indo2"),
+          "spa2": Ner("models/spa2"),
+          "en2": Ner("models/en2")}
 
 
-#@app.route("/predict/", methods=['GET'])
+
+@app.route("/predict/", methods=['GET'])
 def predict():
     text = request.args.get('text')
+    model = request.args.get('model')
     if len(text) >= 512:
         return jsonify({"result": 'too large!'})
+    if model in models:
+        model = models.get(model)
+    else:
+        model = models.get('nl1')
+
     # try:
     out = model.predict(text)
     text_parsed = ""
@@ -23,6 +36,8 @@ def predict():
     result = []
     
     ne = ""
+    p_tag = ''
+    lookup_type = ''
     for r in out:
         text_parsed += r.get('word') + ' '
         if r.get('tag') != 'O':

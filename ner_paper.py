@@ -3,6 +3,7 @@
 import os
 import json
 import syntok.segmenter as segmenter
+from pprint import pprint
 
 from flask import Flask, request, make_response
 from flask_cors import CORS
@@ -13,7 +14,7 @@ CORS(app)
 
 model = Ner("out_base")
 
-BASEPATH = '/root/data/'
+BASEPATH = '/mnt/code/new/'
 
 papers = {}
 
@@ -21,13 +22,25 @@ lookup = {'I-per': 'person',
           'B-per:': 'person',
           'I-loc': 'location',
           'B-loc': 'location',
-          'B-misc': 'other',
-          'I-misc': 'other'}
+          'B-misc': 'miscellaneous',
+          'I-misc': 'miscellaneous',
+          'B-DOM' : 'denomination',
+          'I-DOM' : 'denomination',
+          'B-REF': 'reference',
+          'I-REF': 'reference',
+          'B-QUA': 'quantity',
+          'I-QUA' : 'quantity',
+          'B-DAT': 'date',
+          'I-DAT': 'date',
+          }
+
 
 for f in os.listdir(BASEPATH):
     if os.path.isdir(BASEPATH + f):
         for paper in os.listdir(BASEPATH + f):
-            papers[paper] = BASEPATH + f
+            papers[f] = BASEPATH + f + os.sep 
+
+pprint(papers)
 
 
 def parse_document(document):
@@ -69,11 +82,14 @@ def predict():
     text = request.args.get('text')
     to_parse = set()
     if text in papers:
-        for f in os.listdir(papers[text] + os.sep + text):
-            if os.path.isdir(papers[text] + os.sep + text + os.sep + f):
-                for l in os.listdir(papers[text] + os.sep + text + os.sep + f + os.sep + 'txt'):
-                    to_parse.add(papers[text] + os.sep + text +
-                                 os.sep + f + os.sep + 'txt' + os.sep + l)
+        print(papers.get(text))
+        for f in os.listdir(papers[text]):
+            #print('not here!', papers[text] + os.sep + 'txt' + os.sep + f)
+            if os.path.isdir(papers[text] + f + os.sep + 'txt'):
+                for l in os.listdir(papers[text] + f + os.sep + 'txt'):
+                    print(papers[text] + f + os.sep + 'txt' + os.sep + l)
+
+                    to_parse.add(papers[text] + f + os.sep + 'txt' + os.sep + l)
 
         out = {}
         for f in to_parse:

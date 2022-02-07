@@ -36,7 +36,7 @@ DEBUG = False
 NS_TL = ".//{http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15}TextLine"
 NS_UC = ".//{http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15}Unicode"
 
-WANTED_TAGS = ["date", "denomination", "organization", "person", "place"]
+WANTED_TAGS = ["date", "denomination", "organization", "person", "place", "quantity", "reference"]
 
 LOOKUP = {
     "person": ["B-PER", "I-PER"],
@@ -48,6 +48,7 @@ LOOKUP = {
     "miscellaneous": ["B-MISC", "I-MISC"],
     "denomination": ["B-DOM", "I-DOM"],
     "reference": ["B-REF", "I-REF"],
+    "quantity": ["B-QUA", "I-QUA"]
 }
 
 
@@ -72,10 +73,13 @@ def get_tags(tag_info: str) -> list:
             tags.append([tagname])
             for item in tag.split(":"):
                 for p in item.split(";"):
-                    if p.isalnum() and len(pos) < 1:
-                        pos.append(int(p))
-                    elif p.isalnum() and len(pos) < 2:
-                        pos.append(pos[0] + int(p))
+                    try:
+                        if p.isalnum() and len(pos) < 1:
+                            pos.append(int(p))
+                        elif p.isalnum() and len(pos) < 2:
+                            pos.append(pos[0] + int(p))
+                    except:
+                        pass
 
             tags[-1].append(pos)
     return tags
@@ -195,28 +199,32 @@ def parse_page_file(
 
         sent += text + " "
 
-        for (i, j, prev_text, prev_tags) in to_bio(
-            tags, text, prev_tags, prev_text, combine
-        ):
-            if i:
-                combine = True
-            else:
-                for i in j:
-                    nr_of_tokens += 1
-                    if i[0] == "." and i[1] == "O":
-                        output.append((i[0], i[1]))
-                        output_lines.append(output)
-                        nr_of_newlines += 1
-                        output = []
-                    else:
-                        output.append((i[0], i[1]))
-                        if i[1] == "O":
-                            nr_of_tokens_without_tag += 1
+        try:
+
+            for (i, j, prev_text, prev_tags) in to_bio(
+                tags, text, prev_tags, prev_text, combine
+            ):
+                if i:
+                    combine = True
+                else:
+                    for i in j:
+                        nr_of_tokens += 1
+                        if i[0] == "." and i[1] == "O":
+                            output.append((i[0], i[1]))
+                            output_lines.append(output)
+                            nr_of_newlines += 1
+                            output = []
                         else:
-                            nr_of_tokens_with_tag += 1
-                            if not i[1] in stats["known_tokens"]:
-                                stats["known_tokens"].add(i[1])
-                combine = False
+                            output.append((i[0], i[1]))
+                            if i[1] == "O":
+                                nr_of_tokens_without_tag += 1
+                            else:
+                                nr_of_tokens_with_tag += 1
+                                if not i[1] in stats["known_tokens"]:
+                                    stats["known_tokens"].add(i[1])
+                    combine = False
+        except:
+            pass
 
     if output not in output_lines:
         output_lines.append(output)
