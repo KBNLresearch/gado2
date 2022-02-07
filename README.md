@@ -19,8 +19,12 @@ Training using page files.
 Remove old training data and model:
 ``
 $ rm data/train.txt # Remove old training data.
+``
+
+``
 $ rm -rf out_base # Remove old trained model.
 ``
+
 The page files are an output format by: https://readcoop.eu/transkribus/
 
 Convert the page-files to the bio format using the following command:
@@ -28,9 +32,11 @@ Convert the page-files to the bio format using the following command:
 $ pagexml_to_bio.py --page_dir <<Path to Pagefiles dir>> --output_filename data/train.txt --debug 1
 ``
 Insert GPU and run:
+
 ``
 $ ./train.sh
 ``
+
 The model will be outputed in the directory 'out_base'.  
 
 Running HTTP API.
