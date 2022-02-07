@@ -8,7 +8,7 @@ It contains some local modifications to run it on a different set of NER-classes
 The data/train.txt is a combination of Conll-2002 and input from various Indonesian / Dutch newspapers,
 this is not the final set used for evaluation, more info soon..
 
-The transformer used to make trainng-files from (Prima) page-xml is also included (pagexml_to_bio.py).
+The transformer used to make trainng files from (Prima) page-xml is also included (pagexml_to_bio.py).
 In this project we used export pagexml files from: https://transkribus.eu/.
 
 Trained models are available here: https://huggingface.co/willemjan/
@@ -26,9 +26,9 @@ $ rm data/train.txt # Remove old training data.
 $ rm -rf out_base # Remove old trained model.
 ``
 
-The page files are an output format by: https://readcoop.eu/transkribus/
+The page-xml export from: https://readcoop.eu/transkribus/
 
-Convert the page-files to the bio format using the following command:
+Convert the page-xml to the bio format using the following command:
 
 ``
 $ ./pagexml_to_bio.py --page_dir <<Path to Pagefiles dir>> --output_filename data/train.txt --debug 1
