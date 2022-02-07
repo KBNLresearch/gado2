@@ -33,6 +33,7 @@ Convert the page-files to the bio format using the following command:
 ``
 $ pagexml_to_bio.py --page_dir <<Path to Pagefiles dir>> --output_filename data/train.txt --debug 1
 ``
+
 Insert GPU and run:
 
 ``
