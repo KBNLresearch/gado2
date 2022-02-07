@@ -7,7 +7,7 @@ It contains some local modifications to run it on a different set of NER-classes
 
 https://github.com/KBNLresearch/gado2/blob/main/run_ner.py#L157
 
-
+https://github.com/KBNLresearch/gado2/blob/main/ner_paper.py#L21
 
 
 The data/train.txt is a combination of Conll-2002 and input from various Indonesian / Dutch newspapers,
