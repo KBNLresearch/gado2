@@ -2,7 +2,8 @@ This a fork of: https://github.com/kamalkraj/BERT-NER
 
 It contains some local modifications to run it on a different set of NER-classes.
 
-the data/train.txt is a combination of Conll-2002 and input from various Indonesian / Dutch newspapers.
+the data/train.txt is a combination of Conll-2002 and input from various Indonesian / Dutch newspapers,
+this is not the final set used for evaluation, more info soon..
 
 The transformer used to make trainng-files from (Prima) page-xml is also included (pagexml_to_bio.py).
 In this project we used export pagexml files from: https://transkribus.eu/.
